@@ -1,4 +1,4 @@
-function Set-UrlScanConfig {
+function Set-UrlScanioConfig {
     [CmdletBinding()]
     param (
         [string]$ApiKey

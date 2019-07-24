@@ -1,4 +1,4 @@
-function Start-UrlScanIo {
+function Start-UrlScanio {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true,
