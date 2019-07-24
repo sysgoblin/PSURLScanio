@@ -4,7 +4,6 @@ function Search-UrlScanio {
         [Parameter(Mandatory = $true,
         Position = 0)]
         [string]$Domain,
-
         [switch]$Raw
     )
 
@@ -28,11 +27,24 @@ function Search-UrlScanio {
 
         $request = Invoke-RestMethod -Uri "https://urlscan.io/api/v1/search/?q=domain:$domain" -Headers $headers -ErrorAction:SilentlyContinue
         $results = $request.results
+
+        if ($PSBoundParameters.Raw) { # return raw json if called
+            $out = $results
+        } else {
+            $out = $results | % {
+                [PSCustomObject]@{
+                    TaskDate = $_.task.time
+                    Submission = $_.task.method
+                    id = $_._id
+                    URL = $_.page.url
+                    ApiResult = $_.result
+                    ResultPage = $_.result -replace '/api/v1'
+                }
+            } | sort TaskDate
+        }
     }
 
     end {
-        if ($PSBoundParameters.Raw) {
-            return $results
-        }
+            return $out
     }
 }
