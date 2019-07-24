@@ -5,7 +5,7 @@ function Search-UrlScanio {
         Position = 0)]
         [string]$Domain,
 
-        [string]$Raw
+        [switch]$Raw
     )
 
     begin {
