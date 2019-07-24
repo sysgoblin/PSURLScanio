@@ -1,4 +1,4 @@
-function Start-UrlScan {
+function Start-UrlScanIo {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true,
@@ -6,7 +6,7 @@ function Start-UrlScan {
         [string]$Url,
 
         [Parameter(Mandatory = $false)]
-        [bool]$Public = $true,
+        [switch]$Private,
 
         [Parameter(Mandatory = $false)]
         [switch]$Raw
@@ -35,10 +35,16 @@ function Start-UrlScan {
             "API-Key" = $apiKey
         }
 
-        $body = "{
-            `"url`": `"$url`",
-            `"public`": `"$public`"
-        }"
+        if ($PSBoundParameters.Private) {
+            $body = "{
+                `"url`": `"$url`"
+            }"
+        } else {
+            $body = "{
+                `"url`": `"$url`",
+                `"public`": `"on`"
+            }"
+        }
 
         $request = Invoke-RestMethod -Uri "https://urlscan.io/api/v1/scan/" -Method Post -Headers $headers -Body $body -ErrorAction:SilentlyContinue
         while ($request.message -ne 'Submission successful') {
