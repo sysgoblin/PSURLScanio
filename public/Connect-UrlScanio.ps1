@@ -1,4 +1,4 @@
-function Set-UrlScanioConfig {
+function Connect-UrlScanio {
     [CmdletBinding()]
     param (
         [string]$ApiKey
