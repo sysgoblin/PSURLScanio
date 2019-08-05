@@ -1,4 +1,4 @@
-# PSURLScanio
+# PSURLScanio (wip)
 Powershell module for interacting with the urlscan.io API.
 
 ## Setting up
