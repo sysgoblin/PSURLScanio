@@ -51,7 +51,7 @@ function Start-UrlScanioScan {
         if ($PSBoundParameters.Raw) { # return raw json if called
             $out = $results
         } else {
-            ''
+            $out = $results.task.reporturl
         }
     }
 
