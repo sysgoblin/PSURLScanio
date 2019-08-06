@@ -1,4 +1,24 @@
 function Start-UrlScanioScan {
+<#
+.SYNOPSIS
+Start scan of URL on urlscan.io
+
+.DESCRIPTION
+Start scan of URL on urlscan.io
+
+.PARAMETER Url
+URL to scan
+
+.PARAMETER Private
+Use if the scan should be private
+
+.PARAMETER Raw
+Returns results as raw json
+
+.EXAMPLE
+Start-UrlScanioScan -Url www.google.com
+#>
+
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true,
@@ -14,14 +34,14 @@ function Start-UrlScanioScan {
 
     begin {
         Get-UrlScanIoApiKey
+    }
 
+    process {
         $public = switch ($PSBoundParameters.Public) {
             $true { "on" }
             $false { "off" }
         }
-    }
 
-    process {
         # construct request
         if ($PSBoundParameters.Private) {
             $body = "{`"url`": `"$url`"}"
