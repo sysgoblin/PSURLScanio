@@ -11,6 +11,7 @@ API key from urlscan.io
 
 .EXAMPLE
 Connect-UrlScanio -ApiKey 2ab2f2a4-1fae-4b8a-b889-0015955fa722
+Set urlscan.io API key within config file
 #>
 
     [CmdletBinding()]
