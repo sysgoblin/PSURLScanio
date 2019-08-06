@@ -1,15 +1,36 @@
 function Connect-UrlScanio {
+<#
+.SYNOPSIS
+Create or update the urlscan.io config file
+
+.DESCRIPTION
+Create or update the urlscan.io config file which contains the API key used within the PSUrlScanio module
+
+.PARAMETER ApiKey
+API key from urlscan.io
+
+.EXAMPLE
+Connect-UrlScanio -ApiKey 2ab2f2a4-1fae-4b8a-b889-0015955fa722
+#>
+
     [CmdletBinding()]
     param (
+        [Parameter(Mandatory = $true)]
+        [ValidatePattern('[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}')]
         [string]$ApiKey
     )
 
     if (!(Test-Path -Path "$($env:AppData)\psurlscanio\urlscankey.json")) {
-        New-Item -Path "$($env:AppData)\psurlscanio\urlscankey.json" -Force
-        Write-Verbos "Creating config file at $($env:AppData)\psurlscanio\urlscankey.json"
+        try {
+            New-Item -Path "$($env:AppData)\psurlscanio\urlscankey.json" -Force
+            Write-Verbos "Created config file at $($env:AppData)\psurlscanio\urlscankey.json"
+        } catch {
+            Write-Error "Unable to create file $($env:AppData)\psurlscanio\urlscankey.json"
+            exit
+        }
     }
 
-    $apiKey = ConvertTo-SecureString $ApiKey -AsPlainText -Force | ConvertFrom-SecureString
-    $apiKey | Out-File "$($env:AppData)\psurlscanio\urlscankey.json" -Force
+    $Key = ConvertTo-SecureString $ApiKey -AsPlainText -Force | ConvertFrom-SecureString
+    $Key | Out-File "$($env:AppData)\psurlscanio\urlscankey.json" -Force
     Write-Verbose "Saved key as secure string to config file"
 }
