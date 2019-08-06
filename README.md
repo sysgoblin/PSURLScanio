@@ -2,8 +2,10 @@
 Powershell module for interacting with the urlscan.io API.
 
 ## Setting up
-Head over to urlscan.io and get yourself an API key (https://urlscan.io/user/apikey/new/), then run Connect-UrlScanio
+Head over to urlscan.io and get yourself an API key (https://urlscan.io/user/apikey/new/), clone the repo, then run Connect-UrlScanio.
 ```powershell
+git clone https://github.com/sysgoblin/PSURLScanio
+Import-Module .\PSUrlScanio\PSUrlScanio.psd1
 Connect-UrlScanio -ApiKey abcdefg1234567
 ```
 
