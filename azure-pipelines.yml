@@ -1,5 +1,5 @@
 jobs:
-  - job: Build test
+  - job: Build_tests
     pool:
       vmImage: vs2017-win2016
     steps:
