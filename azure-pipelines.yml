@@ -3,15 +3,11 @@ jobs:
     pool:
       vmImage: vs2017-win2016
     steps:
-    - task: DownloadSecureFile@1
-      name: urlscanKey
-      displayName: 'Download urlscan.io API Key file'
-      inputs:
-        secureFile: 'urlscankey.json'
-    - script: |
-        mkdir %appdata%\psurlscanio
-        copy $(urlscanKey.secureFilePath) %appdata%\psurlscanio\
     - powershell: |
+        Write-Output "Creating key file"
+        $Key = ConvertTo-SecureString $(urlscan apikey) -AsPlainText -Force | ConvertFrom-SecureString
+        $Key | Out-File "$($env:AppData)\psurlscanio\urlscankey.json" -Force
+        Write-Output "Installing Pester"
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
         .\tests\00-PSUrlScanio.Tests.ps1
       displayName: 'Run pester tests'
