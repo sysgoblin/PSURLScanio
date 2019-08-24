@@ -8,7 +8,7 @@ schema: 2.0.0
 # Search-UrlScanio
 
 ## SYNOPSIS
-Search urlscan.io
+Search urlscan.io results.
 
 ## SYNTAX
 
@@ -36,12 +36,12 @@ Params specified are combined to form a valid filter string.
 Search-UrlScanio -Domain google.com -Limit 10
 ```
 
-Returns last 10 scans completed on the domain google.com
+Returns last 10 scans completed on the domain google.com.
 
 ## PARAMETERS
 
 ### -Filter
-Filter string
+Filter string.
 
 ```yaml
 Type: String
@@ -56,7 +56,7 @@ Accept wildcard characters: False
 ```
 
 ### -Domain
-Domain to return results for (equivilent to page.domain)
+Domain to return results for (equivilent to page.domain).
 
 ```yaml
 Type: String
@@ -71,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -IP
-Limit results or return those which are related to the IP provided
+Limit results or return those which are related to the IP provided.
 
 ```yaml
 Type: String
@@ -86,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -ASN
-Limit results or return those which are related to the ASN provided
+Limit results or return those which are related to the ASN provided.
 
 ```yaml
 Type: String
@@ -101,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -ASNName
-Limit results or return those which are related to the ASN Name provided
+Limit results or return those which are related to the ASN Name provided.
 
 ```yaml
 Type: String
@@ -116,7 +116,7 @@ Accept wildcard characters: False
 ```
 
 ### -Filename
-Limit results or return those which are related to the file name provided
+Limit results or return those which are related to the file name provided.
 
 ```yaml
 Type: String
@@ -131,7 +131,7 @@ Accept wildcard characters: False
 ```
 
 ### -Hash
-Limit results or return those which are related to the hash provided
+Limit results or return those which are related to the hash provided.
 
 ```yaml
 Type: String
@@ -146,7 +146,7 @@ Accept wildcard characters: False
 ```
 
 ### -Server
-Limit results or return those which are related to the server provided
+Limit results or return those which are related to the server provided.
 
 ```yaml
 Type: String
@@ -161,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -Limit
-Number of results to return (default 100)
+Number of results to return (default 100).
 
 ```yaml
 Type: Int32
@@ -176,7 +176,7 @@ Accept wildcard characters: False
 ```
 
 ### -Raw
-Return results as raw json
+Return results as raw json.
 
 ```yaml
 Type: SwitchParameter
@@ -195,8 +195,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None. You cannot pipe objects to Search-UrlScanio.
 ## OUTPUTS
 
+### System.String. Data can be returned as a json string.
+### System.Object. Data can be returned as an Object.
 ## NOTES
 
 ## RELATED LINKS
