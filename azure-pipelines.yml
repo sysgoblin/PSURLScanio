@@ -6,7 +6,7 @@ jobs:
     - powershell: |
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
         .\tests\00-PSUrlScanio.Tests.ps1
-      displayname: 'Check manifest'
+      displayName: 'Check manifest'
     - powershell: |
         .\tests\Integration.Tests.ps1
       displayName: 'Run Pester Tests'
