@@ -3,6 +3,14 @@ jobs:
     pool:
       vmImage: vs2017-win2016
     steps:
+    - task: DownloadKeyFile
+      name: urlscanKey
+      displayName: 'Download urlscan.io API Key file'
+      inputs:
+        secureFile: 'urlscankey.json'
+    - script: |
+        mkdir %appdata%\psurlscanio
+        copy $(urlscanKey.secureFilePath) %appdata%\psurlscanio\
     - powershell: |
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
         .\tests\00-PSUrlScanio.Tests.ps1
