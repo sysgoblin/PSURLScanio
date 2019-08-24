@@ -1,12 +1,9 @@
 jobs:
-  - job: Build_PS_Win2016
+  - job: Build test
     pool:
       vmImage: vs2017-win2016
     steps:
     - powershell: |
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
         .\tests\00-PSUrlScanio.Tests.ps1
-      displayName: 'Check manifest'
-    - powershell: |
-        .\tests\Integration.Tests.ps1
-      displayName: 'Run Pester Tests'
+      displayName: 'Run pester tests'

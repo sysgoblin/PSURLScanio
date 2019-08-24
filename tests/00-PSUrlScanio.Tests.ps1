@@ -9,3 +9,8 @@ Describe 'Module Manifest Tests' {
     }
 }
 
+$result = Invoke-Pester -Script "$PSScriptRoot\Integration.Tests.ps1" -PassThru
+
+if ($result.FailedCount -gt 0) {
+    throw "$($result.FailedCount) tests failed."
+}
