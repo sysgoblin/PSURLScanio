@@ -3,7 +3,7 @@ jobs:
     pool:
       vmImage: vs2017-win2016
     steps:
-    - task: DownloadKeyFile@1
+    - task: DownloadSecureFile@1
       name: urlscanKey
       displayName: 'Download urlscan.io API Key file'
       inputs:
