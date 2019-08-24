@@ -6,7 +6,7 @@ jobs:
     - powershell: |
         Write-Output "Creating key file"
         $Key = ConvertTo-SecureString $(urlscan apikey) -AsPlainText -Force | ConvertFrom-SecureString
-        mkdir "$($env:AppData)\psurlscanio"
+        mkdir "$($env:AppData)\psurlscanio" | Out-Null
         $Key | Out-File "$($env:AppData)\psurlscanio\urlscankey.json" -Force
         Write-Output "Installing Pester"
         Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck

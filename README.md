@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/cbaylissmk2/github%20projects/_apis/build/status/sysgoblin.PSURLScanio?branchName=dev)](https://dev.azure.com/cbaylissmk2/github%20projects/_build/latest?definitionId=1&branchName=dev)
+
 # PSURLScanio (wip)
 Powershell module for interacting with the urlscan.io API.
 
