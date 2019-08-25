@@ -78,7 +78,7 @@ System.Object. Data can be returned as an Object.
         [int]$Limit = 100,
         [switch]$Raw,
 
-        [ValidateSet()]
+        [ValidateSet('Placeholder')]
         [string]$Sort
     )
 

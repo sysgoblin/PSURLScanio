@@ -65,6 +65,7 @@ Describe 'Integration tests' {
         }
     }
 
+    Start-Sleep -Seconds 2
     Context "Start-UrlScanioScan" {
         It "Successful submission" {
             $call = Start-UrlScanioScan -Url "www.google.com" -ShowResults:$false
