@@ -61,7 +61,7 @@ Describe 'Integration tests' {
 
         It "Raw results" {
             $call = Search-UrlScanio -Domain "google.com" -Limit 1 -Raw
-            $call | Should -BeLike "*`"task`":  {*"
+            $call | Should -BeLike "*`"task`":*"
         }
     }
 
