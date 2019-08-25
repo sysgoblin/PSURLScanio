@@ -76,7 +76,10 @@ System.Object. Data can be returned as an Object.
         [string]$Server,
 
         [int]$Limit = 100,
-        [switch]$Raw
+        [switch]$Raw,
+
+        [ValidateSet()]
+        [string]$Sort
     )
 
     process {
