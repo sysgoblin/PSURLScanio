@@ -1,3 +1,9 @@
+trigger:
+  paths:
+    include:
+    - src/*
+    - tests/*
+    - tools/*
 jobs:
   - job: Build_tests
     pool:

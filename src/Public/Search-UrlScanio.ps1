@@ -75,11 +75,29 @@ System.Object. Data can be returned as an Object.
         [Parameter(ParameterSetName = 'Params')]
         [string]$Server,
 
+        [ValidateRange(1,10000)]
         [int]$Limit = 100,
-        [switch]$Raw,
 
-        [ValidateSet('Placeholder')]
-        [string]$Sort
+        [ValidateSet('json','Object')]
+        [string]$Raw,
+
+        [switch]$Specific,
+
+        [Parameter(ParameterSetName = 'Sort')]
+        [Parameter(ParameterSetName = 'Params')]
+        [Parameter(ParameterSetName = 'Filter')]
+        [ValidateSet('Date', 'URL', 'Country', 'IP', 'ASN', 'Score')]
+        [string]$SortBy,
+
+        [Parameter(ParameterSetName = 'Sort')]
+        [Parameter(ParameterSetName = 'Params')]
+        [Parameter(ParameterSetName = 'Filter')]
+        [switch]$Descending,
+
+        [Parameter(ParameterSetName = 'Sort')]
+        [Parameter(ParameterSetName = 'Params')]
+        [Parameter(ParameterSetName = 'Filter')]
+        [switch]$Ascending
     )
 
     process {
@@ -93,11 +111,11 @@ System.Object. Data can be returned as an Object.
             # query builder
             $query = @()
             $PSBoundParameters.GetEnumerator() | % {
-                if (($_.Key -ne 'Limit') -and ($_.Key -ne 'Raw')) {
+                if (($_.Key -ne 'Limit') -and ($_.Key -ne 'Raw') -and ($_.Key -ne 'SortBy') -and ($_.Key -ne 'Descending') -and ($_.Key -ne 'Ascending')) {
                     $k = $_.Key.ToLower()
                     $v = $_.Value.ToLower()
 
-                    if ($_.Key -eq 'Domain') { $k = 'page.domain' }
+                    if (($_.Key -eq 'Domain') -and ($Specific)) { $k = 'page.domain' }
                     $query += $k + ':' + $v
                 }
             }
@@ -107,12 +125,32 @@ System.Object. Data can be returned as an Object.
             }
         }
 
-        $url = "https://urlscan.io/api/v1/search/?q=$query" + "&size=$Limit"
-        $request = Invoke-RestMethod -Uri $url -Headers $headers -ErrorAction:Stop
+        # sorting
+        if ($PSBoundParameters.SortBy) {
+            switch ($SortBy) {
+                'Date' { $sortField = 'date' }
+                'URL' { $sortField = 'page.url' }
+                'Country' { $sortField = 'page.country' }
+                'IP' { $sortField = 'page.IP' }
+                'ASN' { $sortField = 'page.ASN' }
+                'Score' { $sortField = '_score' }
+            }
+            $sortOrder = 'desc'
+            if ($PSBoundParameters.Ascending) { $sortOrder = 'asc' }
+        } else {
+            $sortField = 'date'
+            $sortOrder = 'desc'
+        }
+
+        $url = "https://urlscan.io/api/v1/search/?q=$query&size=$Limit&sort_field=$sortField&sort_order=$sortOrder"
+        $request = Invoke-RestMethod -Uri $url -ErrorAction:Stop
         $results = $request.results
 
         if ($PSBoundParameters.Raw) { # return raw json if called
-            $out = $results | ConvertTo-Json
+            switch ($PSBoundParameters.Raw) {
+                json {$out = $results | ConvertTo-Json}
+                Object {$out = $results}
+            }
         } else {
             $out = $results | % {
                 [PSCustomObject]@{
