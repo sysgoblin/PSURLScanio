@@ -13,7 +13,7 @@ Get urlscan.io scan results.
 ## SYNTAX
 
 ```
-Get-UrlScanioScan [-uuid] <String> [-Raw] [<CommonParameters>]
+Get-UrlScanioScan [-id] <String[]> [-Raw] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -31,18 +31,18 @@ Get urlscan.io report for the scan with uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c
 
 ## PARAMETERS
 
-### -uuid
-UUID of scan to get details on.
+### -id
+Guid of scan to get details on.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: uuid, _id
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: True (ByPropertyName)
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 

@@ -14,13 +14,21 @@ Search urlscan.io results.
 
 ### Filter
 ```
-Search-UrlScanio [-Filter <String>] [-Limit <Int32>] [-Raw] [<CommonParameters>]
+Search-UrlScanio [-Filter <String>] [-Limit <Int32>] [-All] [-Raw <String>] [-Specific] [-SortBy <String>]
+ [-Descending] [-Ascending] [<CommonParameters>]
 ```
 
 ### Params
 ```
 Search-UrlScanio [-Domain <String>] [-IP <String>] [-ASN <String>] [-ASNName <String>] [-Filename <String>]
- [-Hash <String>] [-Server <String>] [-Limit <Int32>] [-Raw] [<CommonParameters>]
+ [-Hash <String>] [-Server <String>] [-Limit <Int32>] [-All] [-Raw <String>] [-Specific] [-SortBy <String>]
+ [-Descending] [-Ascending] [<CommonParameters>]
+```
+
+### Sort
+```
+Search-UrlScanio [-Limit <Int32>] [-All] [-Raw <String>] [-Specific] [-SortBy <String>] [-Descending]
+ [-Ascending] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -175,8 +183,83 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -All
+Return all possible results up to a maximum of 10000. (Limit set by urlscan.io)
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Raw
 Return results as raw json.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Specific
+Only return results where the page domain contains the specified domain. Default behaiviour is to return results where domain is called in any part of the page response.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SortBy
+{{ Fill SortBy Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Descending
+{{ Fill Descending Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Ascending
+{{ Fill Ascending Description }}
 
 ```yaml
 Type: SwitchParameter

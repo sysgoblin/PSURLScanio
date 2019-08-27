@@ -12,7 +12,7 @@
 RootModule = 'PSUrlScanio.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.0'
+ModuleVersion = '0.1.5'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -24,7 +24,7 @@ GUID = '00ae67df-b1ae-400c-bcb4-dad7feba9db0'
 Author = 'Chris Bayliss'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+# CompanyName = ''
 
 # Copyright statement for this module
 Copyright = '(c) Chris Bayliss. All rights reserved.'
@@ -33,7 +33,7 @@ Copyright = '(c) Chris Bayliss. All rights reserved.'
 Description = 'Powershell module for utilising the urlscan.io api.'
 
 # Minimum version of the PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '5.1'
 
 # Name of the PowerShell host required by this module
 # PowerShellHostName = ''
@@ -95,19 +95,19 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @('powershell', 'Windows', 'scan', 'urlscan')
 
         # A URL to the license for this module.
         # LicenseUri = ''
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/sysgoblin/PSURLScanio'
 
         # A URL to an icon representing this module.
         # IconUri = ''
 
         # ReleaseNotes of this module
-        # ReleaseNotes = ''
+        ReleaseNotes = 'https://github.com/sysgoblin/PSURLScanio/releases/tag/0.1.5'
 
         # Prerelease string of this module
         # Prerelease = ''
