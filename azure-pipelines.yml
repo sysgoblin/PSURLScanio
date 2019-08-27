@@ -5,9 +5,9 @@ trigger:
       - dev
   paths:
     include:
-    - src/*
-    - tests/*
-    - tools/*
+    - 'src/*'
+    - 'tests/*'
+    - 'tools/*'
 jobs:
   - job: Build_tests
     pool:
