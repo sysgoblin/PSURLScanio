@@ -36,8 +36,14 @@ Filter string.
 .PARAMETER Limit
 Number of results to return (default 100).
 
+.PARAMETER All
+Return all possible results up to a maximum of 10000. (Limit set by urlscan.io)
+
 .PARAMETER Raw
 Return results as raw json.
+
+.PARAMETER Specific
+Only return results where the page domain contains the specified domain. Default behaiviour is to return results where domain is called in any part of the page response.
 
 .EXAMPLE
 Search-UrlScanio -Domain google.com -Limit 10
@@ -78,6 +84,8 @@ System.Object. Data can be returned as an Object.
         [ValidateRange(1,10000)]
         [int]$Limit = 100,
 
+        [switch]$All,
+
         [ValidateSet('json','Object')]
         [string]$Raw,
 
@@ -110,13 +118,22 @@ System.Object. Data can be returned as an Object.
         } elseif ($PSCmdlet.ParameterSetName -eq 'Params') {
             # query builder
             $query = @()
-            $PSBoundParameters.GetEnumerator() | % {
-                if (($_.Key -ne 'Limit') -and ($_.Key -ne 'Raw') -and ($_.Key -ne 'SortBy') -and ($_.Key -ne 'Descending') -and ($_.Key -ne 'Ascending')) {
+            $PSBoundParameters.GetEnumerator() | ForEach-Object {
+                try {
                     $k = $_.Key.ToLower()
                     $v = $_.Value.ToLower()
 
-                    if (($_.Key -eq 'Domain') -and ($Specific)) { $k = 'page.domain' }
-                    $query += $k + ':' + $v
+                    switch ($_.Key) {
+                        Domain { if ($PSBoundParameters.Specific) { $k = 'page.domain' }; $query += $k + ':' + $v }
+                        IP { $query += $k + ':' + $v }
+                        ASN { $query += $k + ':' + $v }
+                        ASNName { $query += $k + ':' + $v }
+                        Filename { $query += $k + ':' + $v }
+                        Hash { $query += $k + ':' + $v }
+                        Server { $query += $k + ':' + $v }
+                    }
+                } catch {
+                    "Carry on" > $null # do nothing if error
                 }
             }
 
@@ -142,17 +159,31 @@ System.Object. Data can be returned as an Object.
             $sortOrder = 'desc'
         }
 
+        if ($PSBoundParameters.All) {
+            Write-Verbose "Getting results up to limit of 10000"
+            $url = "https://urlscan.io/api/v1/search/?q=$query&size=1"
+            $request = Invoke-RestMethod -Uri $url -ErrorAction:Stop
+            $totalCount = $request.total
+            if ($totalCount -gt 10000) {
+                Write-Output "[INFO]`t$totalCount possible results, retrieving maximum results allowed (10000)"
+                $Limit = 10000
+            } else {
+                Write-Verbose "Retrieving $totalCount results"
+                $Limit = $totalCount
+            }
+        }
+
         $url = "https://urlscan.io/api/v1/search/?q=$query&size=$Limit&sort_field=$sortField&sort_order=$sortOrder"
         $request = Invoke-RestMethod -Uri $url -ErrorAction:Stop
         $results = $request.results
 
         if ($PSBoundParameters.Raw) { # return raw json if called
-            switch ($PSBoundParameters.Raw) {
+            switch ($Raw) {
                 json {$out = $results | ConvertTo-Json}
                 Object {$out = $results}
             }
         } else {
-            $out = $results | % {
+            $out = $results | ForEach-Object {
                 [PSCustomObject]@{
                     TaskDate = $_.task.time
                     Submission = $_.task.method
@@ -161,7 +192,7 @@ System.Object. Data can be returned as an Object.
                     ApiResult = $_.result
                     ResultPage = $_.result -replace '/api/v1'
                 }
-            } | sort TaskDate
+            } | Sort-Object TaskDate -Descending
         }
     }
 
