@@ -60,7 +60,7 @@ Describe 'Integration tests' {
         }
 
         It "Raw results" {
-            $call = Search-UrlScanio -Domain "google.com" -Limit 1 -Raw "json"
+            $call = Search-UrlScanio -Domain "google.com" -Specific -Limit 1 -Raw json
             $call | Should -BeLike "*`"task`":*"
         }
     }

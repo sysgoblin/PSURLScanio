@@ -112,7 +112,7 @@
             "isTestCommand": true,
             "showOutput": "always",
             "args": [
-                "Write-Host 'Invoking Pester'; Invoke-Pester -PesterOption @{IncludeVSCodeMarker=$true};",
+                "Write-Host 'Invoking Pester'; Invoke-Pester -PesterOption @{IncludeVSCodeMarker=$true} -Script .\\tests\\00-*;",
                 "Invoke-Command { Write-Host 'Completed Test task in task runner.' }"
             ],
             "problemMatcher": [

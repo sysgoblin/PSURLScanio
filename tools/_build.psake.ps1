@@ -511,7 +511,7 @@ Task Test -depends Build -requiredVariables TestRootDir, ModuleName, CodeCoverag
             $testing.CodeCoverage = $CodeCoverageFiles
         }
 
-        $testResult = Invoke-Pester @testing
+        $testResult = Invoke-Pester @testing -Script 00-*
 
         Assert -conditionToCheck (
             $testResult.FailedCount -eq 0
