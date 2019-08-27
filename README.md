@@ -1,5 +1,5 @@
 [![Build Status](https://dev.azure.com/cbaylissmk2/github%20projects/_apis/build/status/sysgoblin.PSURLScanio?branchName=dev)](https://dev.azure.com/cbaylissmk2/github%20projects/_build/latest?definitionId=2&branchName=dev)
-[![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.1.0-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.1.5)
+[![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.1.5-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.1.5)
 
 
 # PSURLScanio (road to v1.0!)
