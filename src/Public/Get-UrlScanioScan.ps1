@@ -32,23 +32,23 @@ System.Object. Data can be returned as an Object.
     param (
         [Parameter(Mandatory = $true,
         Position = 0,
-        ValueFromPipelineByPropertyName)]
+        ValueFromPipelineByPropertyName,
+        ValueFromPipeline)]
         [ValidatePattern('[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}')]
-        [string]$uuid,
+        [Alias('uuid', '_id')]
+        [string[]]$id,
 
         [Parameter(Mandatory = $false)]
         [switch]$Raw
     )
 
     process {
-        $request = Invoke-RestMethod -Uri "https://urlscan.io/api/v1/result/$uuid" -Headers $headers -ErrorAction:SilentlyContinue
+        $request = Invoke-RestMethod -Uri "https://urlscan.io/api/v1/result/$id" -ErrorAction:SilentlyContinue
 
         if ($PSBoundParameters.Raw) {
             $request = $request | ConvertTo-Json
         }
-    }
 
-    end {
         return $request
     }
 }
