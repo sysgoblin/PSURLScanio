@@ -6,8 +6,8 @@ Get urlscan.io scan results.
 .DESCRIPTION
 Get urlscan.io scan results for the provided uuid. Returns results as an object by default.
 
-.PARAMETER uuid
-UUID of scan to get details on.
+.PARAMETER id
+Guid of scan to get details on.
 
 .PARAMETER Raw
 Returns data as raw json.
