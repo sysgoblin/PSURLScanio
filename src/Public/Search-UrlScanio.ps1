@@ -187,7 +187,7 @@ System.Object. Data can be returned as an Object.
                 [PSCustomObject]@{
                     TaskDate = $_.task.time
                     Submission = $_.task.method
-                    uuid = $_._id
+                    id = $_._id
                     URL = $_.page.url
                     ApiResult = $_.result
                     ResultPage = $_.result -replace '/api/v1'
