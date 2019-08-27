@@ -1,4 +1,12 @@
 function Get-UrlScanioApiKey {
+<#
+.SYNOPSIS
+Grabs api key secure string from file and converts back to plaintext.
+
+.DESCRIPTION
+Grabs api key secure string from file and converts back to plaintext.
+#>
+
     if (!(Test-Path -Path "$($env:AppData)\psurlscanio\urlscankey.json")) {
         Throw "PSURLScanio Configuration file not found in `"$($env:AppData)\psurlscanio\urlscankey.json`", please run Set-UrlScanConfig to configure api key."
     } else {

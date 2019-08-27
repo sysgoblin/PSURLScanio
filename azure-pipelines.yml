@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - master
+      - dev
+  paths:
+    include:
+    - 'src/*'
+    - 'tests/*'
+    - 'tools/*'
+jobs:
+  - job: Build_tests
+    pool:
+      vmImage: vs2017-win2016
+    steps:
+    - powershell: |
+        Write-Output "Creating key file"
+        $Key = ConvertTo-SecureString $(urlscan apikey) -AsPlainText -Force | ConvertFrom-SecureString
+        mkdir "$($env:AppData)\psurlscanio" | Out-Null
+        $Key | Out-File "$($env:AppData)\psurlscanio\urlscankey.json" -Force
+        Write-Output "Installing Pester"
+        Install-Module -Name Pester -Repository PSGallery -Force -SkipPublisherCheck
+        .\tests\00-PSUrlScanio.Tests.ps1
+      displayName: 'Run pester tests'
