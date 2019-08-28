@@ -1,20 +1,22 @@
 [![Build Status](https://dev.azure.com/cbaylissmk2/github%20projects/_apis/build/status/sysgoblin.PSURLScanio?branchName=dev)](https://dev.azure.com/cbaylissmk2/github%20projects/_build/latest?definitionId=2&branchName=dev)
 [![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.1.5-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.1.5)
 
-# PSURLScanio
+# PSURLScanio 🔍
+> A Powershell module for using the urlscan.io API.
+
 PSURLScanio/PSUrlScanio is a Powershell module/wrapper for the urlscan.io API. The module allows you to quickly query/submit data to the service and incorporate it in to your automated threat hunting/intel processes using PoSh.
 
-For example, let's hunt for some potential HSBC phishing pages that have embedded the companies logo!
+For example, let's hunt for some potential HSBC phishing pages that have embedded the companies logo! 🕵️‍
 ![demo1](https://i.imgur.com/wcCeW1D.gif)
 
-# Install
+# Install 📦
 Head over to urlscan.io and get yourself an API key (https://urlscan.io/user/apikey/new/), install the module and then run Connect-UrlScanio to set your key.
 ```powershell
 Install-Module -Name PSUrlScanio -Repository PSGallery
 Connect-UrlScanio -ApiKey "2126abb6-3686-47ef-bae5-9daf6c9e0888"
 ```
 
-## Examples
+# Examples 📜
 ### Search for the last scan for the domain github.com.
 ```powershell
 Search-Urlscanio -Domain github.com -Limit 1 -Specific
@@ -67,3 +69,18 @@ verdicts : @{overall=; urlscan=; engines=; community=}
 ```
 
 (Example results have been truncated)
+
+# FAQ ❓
+
+ - **Can I contribute?**
+   - Yes please! Feel free to clone/test/add features and submit a PR or enhancement suggestion. Help yourself to the project board if you feel like it!
+ - **Why can I only get 10000 results? There are way more for this domain!**
+   - 10k results is the max limit for the API, and I haven't figured out a magical way around it (yet...).
+ - **Something's broke.**
+   - Please submit an issue for it and I'll take a look!
+
+# Support
+
+Feel free to reach out to me via twitter <a href="https://twitter.com/sysgoblin" target="_blank">`@sysgoblin`</a>.
+
+If you fancy supporting me and what I'm working on you can always buy me a sfw beer (aka coffee) by the sponsor button on this repo. ☕👌
