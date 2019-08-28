@@ -13,7 +13,7 @@ Get urlscan.io scan results.
 ## SYNTAX
 
 ```
-Get-UrlScanioScan [-id] <String[]> [-Raw] [<CommonParameters>]
+Get-UrlScanioScan [-id] <String[]> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,21 +43,6 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
-Accept wildcard characters: False
-```
-
-### -Raw
-Returns data as raw json.
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

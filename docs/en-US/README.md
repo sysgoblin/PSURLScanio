@@ -23,4 +23,3 @@ Search urlscan.io using the provided parameters or providing a filter using Elas
 
 ### [Start-UrlScanioScan](Start-UrlScanioScan.md)
 Start-UrlScanioScan triggers a scan of the specified URL.
-
