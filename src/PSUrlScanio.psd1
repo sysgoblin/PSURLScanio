@@ -12,7 +12,7 @@
 RootModule = 'PSUrlScanio.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.5'
+ModuleVersion = '0.5.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'https://github.com/sysgoblin/PSURLScanio/releases/tag/0.1.5'
+        # ReleaseNotes = ''
 
         # Prerelease string of this module
         # Prerelease = ''
