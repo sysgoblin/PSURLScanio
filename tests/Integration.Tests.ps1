@@ -58,11 +58,6 @@ Describe 'Integration tests' {
             $call = Search-UrlScanio -Filter "page.domain:ch AND !page.country:ch" -Limit 1
             $call | Should -Not -Be $null
         }
-
-        It "Raw results" {
-            $call = Search-UrlScanio -Domain "google.com" -Specific -Limit 1 -Raw json
-            $call | Should -BeLike "*`"task`":*"
-        }
     }
 
     Start-Sleep -Seconds 2
