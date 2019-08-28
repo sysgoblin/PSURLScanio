@@ -40,7 +40,7 @@ Number of results to return (default 100).
 Return all possible results up to a maximum of 10000. (Limit set by urlscan.io)
 
 .PARAMETER Raw
-Return results as raw json.
+Return results as raw json or object.
 
 .PARAMETER Specific
 Only return results where the page domain contains the specified domain. Default behaiviour is to return results where domain is called in any part of the page response.
@@ -55,10 +55,6 @@ None. You cannot pipe objects to Search-UrlScanio.
 .OUTPUTS
 System.String. Data can be returned as a json string.
 System.Object. Data can be returned as an Object.
-
-.NOTES
-
-.LINK
 #>
 
     [CmdletBinding()]
