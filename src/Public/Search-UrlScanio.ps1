@@ -66,19 +66,33 @@ System.Object. Data can be returned as an Object.
         [Parameter(ParameterSetName = 'Filter')]
         [string]$Filter,
 
-        [Parameter(ParameterSetName = 'Params')]
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$Domain,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$IP,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$ASN,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$ASNName,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
+        [Alias('file')]
         [string]$Filename,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$Hash,
-        [Parameter(ParameterSetName = 'Params')]
+
+        [Parameter(ParameterSetName = 'Params',
+        ValueFromPipelineByPropertyName)]
         [string]$Server,
 
         [ValidateRange(1,10000)]
