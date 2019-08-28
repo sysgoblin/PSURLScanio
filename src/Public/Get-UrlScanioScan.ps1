@@ -9,9 +9,6 @@ Get urlscan.io scan results for the provided uuid. Returns results as an object 
 .PARAMETER id
 Guid of scan to get details on.
 
-.PARAMETER Raw
-Returns data as raw json.
-
 .EXAMPLE
 Get-UrlScanioScan -uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c7
 Get urlscan.io report for the scan with uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c7
@@ -36,18 +33,11 @@ System.Object. Data can be returned as an Object.
         ValueFromPipeline)]
         [ValidatePattern('[\d\w]{8}-[\d\w]{4}-[\d\w]{4}-[\d\w]{4}-[\d\w]{12}')]
         [Alias('uuid', '_id')]
-        [string[]]$id,
-
-        [Parameter(Mandatory = $false)]
-        [switch]$Raw
+        [string[]]$id
     )
 
     process {
         $request = Invoke-RestMethod -Uri "https://urlscan.io/api/v1/result/$id" -ErrorAction:SilentlyContinue
-
-        if ($PSBoundParameters.Raw) {
-            $request = $request | ConvertTo-Json
-        }
 
         return $request
     }

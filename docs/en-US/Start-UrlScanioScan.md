@@ -13,7 +13,7 @@ Start scan of URL on urlscan.io
 ## SYNTAX
 
 ```
-Start-UrlScanioScan [-Url] <String> [-Private] [-ShowResults <Boolean>] [-Raw] [<CommonParameters>]
+Start-UrlScanioScan [-Url] <String[]> [-Private] [-ShowResults] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,14 +44,14 @@ A url for the report will be returned while the scan takes place.
 URL to scan.
 
 ```yaml
-Type: String
+Type: String[]
 Parameter Sets: (All)
-Aliases:
+Aliases: domain
 
 Required: True
 Position: 1
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 
@@ -74,28 +74,13 @@ Accept wildcard characters: False
 True by default, set to false if you just want the report URL.
 
 ```yaml
-Type: Boolean
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: True
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Raw
-Returns results as a raw json string.
-
-```yaml
 Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: Named
-Default value: False
+Default value: True
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
