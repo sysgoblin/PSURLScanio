@@ -13,7 +13,7 @@ Get urlscan.io scan results.
 ## SYNTAX
 
 ```
-Get-UrlScanioScan [-id] <String[]> [<CommonParameters>]
+Get-UrlScanioScan [-id] <String[]> [-DataType <String>] [-IncludeTaskDetails] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,6 +43,36 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: True (ByPropertyName, ByValue)
+Accept wildcard characters: False
+```
+
+### -DataType
+Data type to return. Provides quick access to specific sub-sets of data for interrogation.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IncludeTaskDetails
+{{ Fill IncludeTaskDetails Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
