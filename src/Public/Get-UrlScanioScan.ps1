@@ -4,13 +4,13 @@ function Get-UrlScanioScan {
 Get urlscan.io scan results.
 
 .DESCRIPTION
-Get urlscan.io scan results for the provided uuid. Returns results as an object by default.
+Get urlscan.io scan results for the provided id. Returns results as an object by default or -DataType can be used to access subsets of data.
 
 .PARAMETER id
 Guid of scan to get details on.
 
 .PARAMETER DataType
-Data type to return. Provides quick access to specific sub-sets of data for interrogation.
+Data type to return. Provides quick access to specific  subsets of data for interrogation.
 
 .EXAMPLE
 Get-UrlScanioScan -uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c7
