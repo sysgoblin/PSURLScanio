@@ -67,7 +67,6 @@ page     : @{url=http://www.google.com/sorry/index?continue=http://google.com/&q
 lists    : @{ips=System.Object[]; countries=System.Object[]; asns=System.Object[]; domains=System.Object[]; servers=System.Object[]; urls=System.Object[]; linkDomains=System.Object[]; certificates=System.Object[]; hashes=System.Object[]}
 verdicts : @{overall=; urlscan=; engines=; community=}
 ```
-
 (Example results have been truncated)
 
 # FAQ ❓
