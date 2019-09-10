@@ -28,7 +28,7 @@ System.Object. Data can be returned as an Object.
 
 .LINK
 #>
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'All')]
     param (
         [Parameter(Mandatory = $true,
         Position = 0,
@@ -39,11 +39,13 @@ System.Object. Data can be returned as an Object.
         [string[]]$id,
 
         [Parameter(ParameterSetName = 'data')]
-        [ValidateSet('Links','Hashes','Cookies','Certificates','Verdict')]
+        [ValidateSet('Links','Hashes','Cookies','Certificates','Verdict','Technologies')]
         [string]$DataType,
-
         [Parameter(ParameterSetName = 'data')]
-        [switch]$IncludeTaskDetails
+        [switch]$IncludeTaskDetails,
+
+        [Parameter(ParameterSetName = 'similar')]
+        [switch]$SimilarDomains
     )
 
     process {
@@ -51,18 +53,17 @@ System.Object. Data can be returned as an Object.
 
         if ($PSBoundParameters.DataType) {
             # output basic task deets
+            $props = [ordered]@{}
             if ($PSBoundParameters.IncludeTaskDetails) {
                 $task = $request.task | select uuid, time, url, reportURL
+
+                $props.Property +=  @{n="id";e={$task.uuid}},
+                                            @{n="time";e={$task.time}},
+                                            @{n="taskUrl";e={$task.url}}
             }
-            $props = @{}
 
             switch ($DataType) {
                 Links {
-                    if ($task) {
-                        $props.Property +=  @{n="id";e={$task.uuid}},
-                                            @{n="time";e={$task.time}},
-                                            @{n="taskUrl";e={$task.url}}
-                    }
                     $props.Property += 'href','text'
 
                     $out = $request.data.links | select @props
@@ -73,11 +74,7 @@ System.Object. Data can be returned as an Object.
                 }
                 Hashes {
                     $hashes = $request.data.requests.response.Where({$_.hash})
-                    if ($task) {
-                        $props.Property +=  @{n="id";e={$task.uuid}},
-                                            @{n="time";e={$task.time}},
-                                            @{n="taskUrl";e={$task.url}}
-                    }
+
                     $props.Property +=  @{n="type";e={$_.type}},
                                         @{n="size";e={$_.size}},
                                         @{n="hash";e={$_.hash}},
@@ -87,11 +84,6 @@ System.Object. Data can be returned as an Object.
                 }
                 Cookies {
                     [datetime]$origin = '1970-01-01 00:00:00'
-                    if ($task) {
-                        $props.Property +=  @{n="id";e={$task.uuid}},
-                                            @{n="time";e={$task.time}},
-                                            @{n="taskUrl";e={$task.url}}
-                    }
                     $props.Property +=  'name',
                                         'value',
                                         'domain',
@@ -110,11 +102,6 @@ System.Object. Data can be returned as an Object.
                 }
                 Certificates {
                     [datetime]$origin = '1970-01-01 00:00:00'
-                    if ($task) {
-                        $props.Property +=  @{n="id";e={$task.uuid}},
-                                            @{n="time";e={$task.time}},
-                                            @{n="taskUrl";e={$task.url}}
-                    }
                     $props.Property +=  'subjectName',
                                         'issuer',
                                         @{n='validFrom';e={$origin.AddSeconds($_.validFrom)}},
@@ -125,28 +112,37 @@ System.Object. Data can be returned as an Object.
                 Verdict {
                     $vo = $request.verdicts.overall
                     $ve = $request.verdicts.engines
-                    $out = @{}
+                    $out = New-Object psobject
 
                     if ($task) {
-                        $out += @{
-                            id = $task.uuid
-                            time = $task.time
-                            taskUrl = $task.url
-                        }
+                        $out | Add-Member NoteProperty 'id' $task.uuid
+                        $out | Add-Member NoteProperty 'time' $task.time
+                        $out | Add-Member NoteProperty 'time' $task.time
+                        $out | Add-Member NoteProperty 'taskUrl' $task.url
                     }
 
-                    $out += @{
-                        malicious = $vo.malicious
-                        overallScore = $vo.score
-                        tags = (@($vo.tags + $ve.verdicts.categories) | select -Unique) -join ', '
-                        brands = $vo.brands -join ', '
-                        engineHits = $ve.malicious -join ', '
-                    }
+                    $out | Add-Member NoteProperty 'malicious' $vo.malicious
+                    $out | Add-Member NoteProperty 'overallScore' $vo.score
+                    $out | Add-Member NoteProperty 'tags' ((@($vo.tags + $ve.verdicts.categories) | select -Unique) -join ', ')
+                    $out | Add-Member NoteProperty 'brands' ($vo.brands -join ', ')
+                    $out | Add-Member NoteProperty 'engineHits' ($ve.malicious -join ', ')
+                }
+                Technologies {
+                    $wappa = $request.meta.processors.wappa.data
 
+                    $props.Property +=  @{n="App";e={$_.app}},
+                                        @{n="Website";e={$_.website}},
+                                        @{n="Category";e={$_.categories.name}}
+
+                    $out = $wappa | select @props
                 }
             }
         } else {
             $out = $request
+        }
+
+        if ($PSCmdlet.ParameterSetName -eq 'similar') {
+            $out = Get-SimilarDomains -id $id
         }
 
         return $out
