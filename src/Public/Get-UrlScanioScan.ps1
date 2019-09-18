@@ -12,6 +12,12 @@ Guid of scan to get details on.
 .PARAMETER DataType
 Data type to return. Provides quick access to specific  subsets of data for interrogation.
 
+.PARAMETER IncludeTaskDetails
+Includes details of scan along with data type specified.
+
+.PARAMETER SimilarDomains
+List structurally similar domains.
+
 .EXAMPLE
 Get-UrlScanioScan -uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c7
 Get urlscan.io report for the scan with uuid b14db0aa-013c-4aa9-ad5a-ec947a2278c7
