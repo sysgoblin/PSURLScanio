@@ -12,8 +12,19 @@ Get urlscan.io scan results.
 
 ## SYNTAX
 
+### All (Default)
+```
+Get-UrlScanioScan [-id] <String[]> [<CommonParameters>]
+```
+
+### data
 ```
 Get-UrlScanioScan [-id] <String[]> [-DataType <String>] [-IncludeTaskDetails] [<CommonParameters>]
+```
+
+### similar
+```
+Get-UrlScanioScan [-id] <String[]> [-SimilarDomains] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,7 +62,7 @@ Data type to return. Provides quick access to specific sub-sets of data for inte
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: data
 Aliases:
 
 Required: False
@@ -66,7 +77,22 @@ Accept wildcard characters: False
 
 ```yaml
 Type: SwitchParameter
-Parameter Sets: (All)
+Parameter Sets: data
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SimilarDomains
+List structurally similar domains.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: similar
 Aliases:
 
 Required: False

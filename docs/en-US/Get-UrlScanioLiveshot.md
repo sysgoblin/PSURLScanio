@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-UrlScanioLiveshot
 
 ## SYNOPSIS
-Get live screenshot of specified URL.
+Create or update the urlscan.io config file.
 
 ## SYNTAX
 
