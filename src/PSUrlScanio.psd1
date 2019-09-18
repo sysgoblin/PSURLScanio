@@ -12,7 +12,7 @@
 RootModule = 'PSUrlScanio.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.5.0'
+ModuleVersion = '0.8.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
