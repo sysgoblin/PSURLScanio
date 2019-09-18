@@ -45,7 +45,7 @@ System.Object. Data can be returned as an Object.
         [string[]]$id,
 
         [Parameter(ParameterSetName = 'data')]
-        [ValidateSet('Links','Hashes','Cookies','Certificates','Verdict','Technologies')]
+        [ValidateSet('Links','Hashes','Cookies','Certificates','Verdict','Technologies', 'iocs')]
         [string]$DataType,
         [Parameter(ParameterSetName = 'data')]
         [switch]$IncludeTaskDetails,
@@ -141,6 +141,21 @@ System.Object. Data can be returned as an Object.
                                         @{n="Category";e={$_.categories.name}}
 
                     $out = $wappa | select @props
+                }
+                iocs {
+                    $req = Invoke-WebRequest "https://urlscan.io/result/$id/#iocs" -UseBasicParsing
+                    $iocsRaw = [regex]::match($req.content, '<h3>Indicators of compromise \(IoCs\)<\/h3>(.|\n)*<footer class="footer navbar-default">').Value
+
+                    $iocsParsed = $iocsRaw.Split("`n").Trim() | % {
+                        $l = $_
+
+                        if ($l -match 'a href') {
+                            $m = [regex]::Matches($l, '<a href=.*?>(.*)<\/a>')
+                            $m.Groups[1].Value
+                        }
+                    }
+
+                    $out = $iocsParsed
                 }
             }
         } else {
