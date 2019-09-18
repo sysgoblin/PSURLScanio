@@ -3,7 +3,7 @@ function Get-SimilarDomains {
         [string]$id
     )
 
-    $html = Invoke-WebRequest "https://urlscan.io/result/$id/related/"
+    $html = Invoke-WebRequest "https://urlscan.io/result/$id/related/" -UseBasicParsing
 
     $links = $html.links
 

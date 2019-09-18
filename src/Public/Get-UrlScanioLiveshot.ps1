@@ -47,6 +47,6 @@ Download screenshot of google.com to c:\temp. File will be saved as c:\temp\goog
 
         $outFile = "$($URL -replace 'http.*:\/\/','' -replace '\/', '.')" + ".png"
 
-        Invoke-WebRequest "https://urlscan.io/liveshot/?width=$Width&height=$Height&url=$URL" -OutFile $Path\$outFile -TimeoutSec 15
+        Invoke-WebRequest "https://urlscan.io/liveshot/?width=$Width&height=$Height&url=$URL" -OutFile $Path\$outFile -TimeoutSec 15 -UseBasicParsing
     }
 }
