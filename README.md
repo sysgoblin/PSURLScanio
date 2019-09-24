@@ -1,5 +1,5 @@
 [![Build Status](https://dev.azure.com/cbaylissmk2/github%20projects/_apis/build/status/sysgoblin.PSURLScanio?branchName=dev)](https://dev.azure.com/cbaylissmk2/github%20projects/_build/latest?definitionId=2&branchName=dev)
-[![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.5-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.5)
+[![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.8-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.8)
 
 ## 🔍 PSURLScanio
 > A Powershell module for using the urlscan.io API.
@@ -7,7 +7,9 @@
 PSURLScanio/PSUrlScanio is a Powershell module/wrapper for the urlscan.io API. The module allows you to quickly query/submit data to the service and incorporate it in to your automated threat hunting/intel processes using PoSh.
 
 For example, let's hunt for some potential HSBC phishing pages that have embedded the companies logo! 🕵️‍
-![demo1](https://i.imgur.com/wcCeW1D.gif)
+![demo1](https://i.imgur.com/EuqSwoO.gif)
+
+From here we could loop through each result to grab more data, or even retrieve live screenshots!
 
 ## 📦 Install
 Head over to urlscan.io and get yourself an API key (https://urlscan.io/user/apikey/new/), install the module and then run Connect-UrlScanio to set your key.
@@ -53,6 +55,19 @@ task     : @{uuid=03ba7a78-e779-4743-ae37-2b683ee9ec74; ...}
 page     : @{url=https://www.google.com/?gws_rd=ssl; domain=www.google.com; ...}
 lists    : @{ips=System.Object[]; countries=System.Object[]; ...}
 verdicts : @{overall=; urlscan=; engines=; community=}
+```
+
+### Get results from a scan but only return hash information
+```powershell
+Get-UrlScanioScan -id 03ba7a78-e779-4743-ae37-2b683ee9ec74 -DataType Hashes
+
+type      size    hash                                                              url
+----      ----    ----                                                              ---
+Document  237303  3bd8b5dc1430a1cf1bb26c08d7553f9ec2ee2d09b466dcb38e5674e7c368bf9b  https://www.google.com/?...
+Image       7960  5776cd87617eacec3bc00ebcf530d1924026033eda852f706c1a675a98915826  https://www.google.com/images/...
+Image       9768  a0e3b4584e7c0eb991bd5668a7495674dadccd5d1261dcba749d03700c5bceaa  https://ssl.gstatic.com/gb/...
+Image        864  68d641e6402d4fbf0ddd37c95af75afdfad913dd9a7e7c6d3d9589b81512a12e  https://www.gstatic.com/images/...
+Image          0  e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  https://consent.google.com/...
 ```
 
 ### Kick off a scan on the chosen domain/URL and return the scan results.
