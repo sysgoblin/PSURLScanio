@@ -31,3 +31,6 @@ Search urlscan.io results.
 
 ### [Start-UrlScanioScan](Start-UrlScanioScan.md)
 Start scan of URL on urlscan.io
+
+### [Watch-UrlScanioScan](Watch-UrlScanioScan.md)
+Live feed of urlscan.io submissions.
