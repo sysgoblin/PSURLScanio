@@ -1,5 +1,5 @@
 [![Build Status](https://dev.azure.com/cbaylissmk2/github%20projects/_apis/build/status/sysgoblin.PSURLScanio?branchName=dev)](https://dev.azure.com/cbaylissmk2/github%20projects/_build/latest?definitionId=2&branchName=dev)
-[![Powershell Gallery](https://img.shields.io/badge/PSGallery-0.8-yellow)](https://www.powershellgallery.com/packages/PSUrlScanio/0.8)
+[![Powershell Gallery](https://img.shields.io/badge/PSGallery-1.0-success)](https://www.powershellgallery.com/packages/PSUrlScanio/1.0)
 
 ## 🔍 PSURLScanio
 > A Powershell module for using the urlscan.io API.
