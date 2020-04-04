@@ -37,7 +37,7 @@ Saves screenshot of specified id as C:\temp\b14db0aa-013c-4aa9-ad5a-ec947a2278c7
 
         if (Test-Path $Path -PathType Container) {
             try {
-                Invoke-WebRequest " https://urlscan.io/screenshots/$id.png" -OutFile "$id.png" -UseBasicParsing
+                Invoke-WebRequest " https://urlscan.io/screenshots/$id.png" -OutFile "$($Path)\$id.png" -UseBasicParsing
                 Write-Verbose "Screenshot saved to $Path\$id.png"
             } catch {
                 $_.Exception.Message
